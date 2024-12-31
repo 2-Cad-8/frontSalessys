@@ -1,0 +1,29 @@
+.gradient-bg{
+    background-image: linear-gradient(#FFEBE4, #F5DAD2,#D7BFB8,#CAB4AD);
+    border:none;
+    border-radius: 1.25rem;
+}
+.gradient-bg-180{
+    background-image: linear-gradient(0deg,#FFEBE4, #F5DAD2,#D7BFB8,#CAB4AD);
+    border:none;
+    border-radius: 1.25rem;
+}
+.gradient-bg-256{
+    background-image: linear-gradient(256deg,#FFEBE4, #F5DAD2,#D7BFB8,#CAB4AD);
+    border:none;
+    border-radius: 1.25rem;
+}
+.buttonGreen {
+    border-radius: 1.25rem;
+    border-style: solid;
+    border-color: #96DBA5;
+    background-color: #ffffff;
+    color:#75A47F;
+    padding: 0.3125rem;
+    min-width: 5rem;
+}
+.simpleCard{
+    background-color: #ffffff;
+    border-radius: 1.25rem;
+    width: fit-content;
+}
