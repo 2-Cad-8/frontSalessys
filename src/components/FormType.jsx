@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export default function FormType({edit,onSend=f=>f, onEdit = f =>f }){
-    const opts = ['Sales','Platform','Investments']
+    const opts = ['Product','Platform','Investments','Payment Method']
 
 
     const handleForm = (e)=>{

@@ -45,6 +45,7 @@ export default function Pagination({
   };
   return (
     <>
+    {pages!=undefined && pages.length>1?
       <div>
     
        <ul className="pagination">
@@ -76,6 +77,7 @@ export default function Pagination({
         </li>
         </ul>
       </div>
+      : <></>}
     </>
   );
 }

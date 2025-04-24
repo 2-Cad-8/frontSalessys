@@ -15,6 +15,9 @@ export default function TableCard({
 }){
     const [dltItem, setDltItem] = useState(null)
     const [displayData, setDisplayData] = useState([])
+    const [field,param ]= inventory
+
+    
     const dataEdit = async (e) =>{
       
         try{
@@ -25,16 +28,16 @@ export default function TableCard({
             console.error(error)
         }
     }
-    const [field,param ]= inventory
+    
     const onDelete = async (id) =>{
-        console.log('delete function '+ id)
+       // console.log('delete function '+ id)
        if(id !== null) {
        try{
         const res = await axios.get(`http://127.0.0.1:8000/api/v1/${from}/${id}/`)
         const newdata =  { ...res.data, delete: 1 };
         await axios.put(`http://127.0.0.1:8000/api/v1/${from}/${id}/`,newdata)
      
-            console.log('deleted')
+           // console.log('deleted')
             onSent(true)
             setDltItem(null)
 
@@ -44,7 +47,7 @@ export default function TableCard({
     }
 }
 useEffect(() =>{
-    console.log('use effect bro'+dltItem)
+    //console.log('use effect bro'+dltItem)
     
 },[dltItem,displayData])
 
@@ -67,7 +70,7 @@ useEffect(() =>{
                             displayData.map((file) =>{
                             
                             return(<tr key= {file.id} className={file.units === param ? 'table-danger':''} >
-                            { field ? console.log(file.units === param):''}
+                            {/* field ? console.log(file.units === param):''*/}
                             { //
                                
                                 colTitles.map((name)=>{
@@ -84,7 +87,7 @@ useEffect(() =>{
                                                      className='mx-1'
                                                      onClick={()=>{
                                                         setDltItem(file.id)
-                                                        console.log(dltItem)
+                                                        //console.log(dltItem)
                                                     }} 
                                                      data-bs-toggle="modal" 
                                                      data-bs-target="#deleteModal"
@@ -104,17 +107,19 @@ useEffect(() =>{
                     </tbody>
                 </table>
                 {/*Her shoud go pagination component */}
+               
                <div className='row justify-content-center'>
                <div className='col-4 '>
                <Pagination
                     data = {data}
                     itemPerPage={itemsTable}
                     onChangePage={(newdata)=> {
-                        console.log(newdata)
+                        //console.log(newdata)
                         setDisplayData(newdata)}}
                 />
                 </div>
                 </div>
+                
             {/******************************************************DELETE MODAL */}
          
 

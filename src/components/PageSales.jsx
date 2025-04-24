@@ -59,6 +59,7 @@ export default function PageSales(){
                   onSent={(data)=>{
                     setSent(data)
                   }}
+                  itemsTable={10}
                 />
                 :
                 <p>Sin Datos</p>

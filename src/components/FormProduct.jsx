@@ -46,7 +46,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
               })
               .catch(console.error);
           } else {
-            console.log(newdata)
+            //console.log(newdata)
             axios.put(`http://127.0.0.1:8000/api/v1/inventory/${edit.id}/`, newdata)
               .then(() => {
                 console.log('Updated');
@@ -62,7 +62,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
         getType(0)
         getType(1)
     },[])
-    console.log(`I'm on Form ADD SALES > ${JSON.stringify(edit)}`)
+    //console.log(`I'm on Form ADD SALES > ${JSON.stringify(edit)}`)
   
     return(
         <>
@@ -110,7 +110,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
                 <div className="mb-3 col-4">
                     <label htmlFor="total" className="form-label">Categoria</label>
                     <input  type="text" className="form-control" id="category"  name="category"
-
+                         defaultValue={(edit ? edit.category : '' )}
                     />
                 </div>
             </div>

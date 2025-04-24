@@ -15,7 +15,7 @@ export default function PageConfig(){
         const res = await axios.get('http://127.0.0.1:8000/api/v1/type/')
         const datos = res.data.filter((item)=> item.delete !=1)
         console.log(datos)
-        const finalDatons = datos.map((item)=>{
+        datos.map((item)=>{
           switch(item.tipo){
             case 0:
               item.tipo = 'Producto'
@@ -23,9 +23,15 @@ export default function PageConfig(){
             case 1:
               item.tipo = 'Platforms'
               break;
+            case 2:
+              item.tipo = 'Investments'
+              break;
+            case 3:
+              item.tipo = 'Payment Method'
+              break;
           }
         })
-       
+       console.log(datos)
       setData(datos)
         
         }catch(error){
@@ -135,6 +141,7 @@ export default function PageConfig(){
                     onSent={(data)=>{
                       setSent(data)
                     }}
+                    itemsTable={10}
                   />
                 :
                 <p>Sin Datos</p>

@@ -38,7 +38,7 @@ export default function Dashboard(){
 
     }
 
-    const totalMonth =(array)=>{
+    const totalMonth =  (array)=>{
       let data = [{
         "month":"enero",
           "amount":0
@@ -99,6 +99,7 @@ export default function Dashboard(){
         })
         data[i].amount = result
       }
+    
       return data;
       
     }
@@ -130,7 +131,7 @@ export default function Dashboard(){
           </div>
           <div className='col-sm-8 '> 
           <div className="card border-light p-2" style={{borderRadius:'1.25rem'}}>
-          {salesData && investData?
+          {salesData != undefined && investData !=undefined?
             <BarsChart sales ={totalMonth(salesData)} invest={totalMonth(investData)}/>
             :
             <p>Loading...</p>
@@ -143,7 +144,7 @@ export default function Dashboard(){
               <h3 className='p-1 text-white'>Sales</h3>
               <div className="card border-light p-2" style={{borderRadius:'1.25rem'}}>
               {
-                      salesData ?
+                      salesData !=undefined ?
                         <TableCard colTitles={tableTitle} data={totalMonth(salesData)} />
                       :
                       <TableCard colTitles={tableTitle} data={0} />
@@ -154,7 +155,7 @@ export default function Dashboard(){
             <div className='col-md-5 my-1'>
             <h3 className='p-1 text-white'>Investment</h3>
             <div className="card border-light p-2" style={{borderRadius:'1.25rem'}}>
-            {investData ?
+            {investData != undefined?
               <TableCard colTitles={tableTitle} data={totalMonth(investData)} />
             :
             <TableCard colTitles={tableTitle} data={0} />
@@ -193,7 +194,7 @@ export default function Dashboard(){
                             </div>
                             <div className='col-sm-8 mt-3'> 
                               <div className="card border-light p-2" style={{borderRadius:"1.25rem"}}>
-                              {salesData && investData?
+                              {salesData != undefined && investData != undefined?
                                 <BarsChart sales ={totalMonth(salesData)} invest={totalMonth(investData)}/>
                                 :
                                 <p>Loading...</p>
@@ -211,7 +212,7 @@ export default function Dashboard(){
                   <div className="col-6">
                     <div className="card border-light p-2 mx-1" style={{borderRadius:"1.25rem", width:"fit-content"}}>
                           {
-                            salesData ?
+                            salesData != undefined?
                                 <TableCard colTitles={tableTitle} data={totalMonth(salesData).slice(0,6)} />
                             :
                                 <TableCard colTitles={tableTitle} data={0} />
@@ -236,7 +237,7 @@ export default function Dashboard(){
                   <div className="col-6">
                         <div className="card border-light p-2 mx-1" style={{borderRadius:"1.25rem", width:"fit-content"}}>
                           {
-                            salesData ?
+                            salesData != undefined ?
                             <TableCard colTitles={tableTitle} data={totalMonth(investData).slice(0,6)} /> 
                             :
                                 <TableCard colTitles={tableTitle} data={0} />
@@ -246,7 +247,7 @@ export default function Dashboard(){
                   <div className="col-6">
                   <div className="card border-light p-2 mx-1" style={{borderRadius:"1.25rem", width:"fit-content"}}>
                       {
-                        salesData ?
+                        salesData != undefined ?
                         <TableCard colTitles={tableTitle} data={totalMonth(investData).slice(6,12)} />
                         :
                             <TableCard colTitles={tableTitle} data={0} />

@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { searchProduct } from "../functions/extra";
+import { use } from "react";
 
 export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
-    const [precio, setPrecio]=useState(edit? edit.precio : 0)
-    const [cantidad, setCantidad]=useState( edit? edit.cantidad : 0)
+    const [precio, setPrecio]=useState(edit? edit.precio : 1)
+    const [cantidad, setCantidad]=useState( edit? edit.cantidad : 1)
     //const [productos, setProductos]=useState()
     const [platforms, setPlatforms]=useState()
     const [codPro, setCodPro] =useState([]);
+    const [paymentMethod,setPaymentMethod]= useState();
+    const [discount,setDiscount] = useState(false);
 
     const getType = async (type)=>{
         const data = await axios.get('http://127.0.0.1:8000/api/v1/type')
@@ -16,8 +19,10 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
        
         if(type ==0){
             setProductos(opts)
-        }else{
+        }else if(type ==1){
             setPlatforms(opts)
+        }else if(type ==3){
+            setPaymentMethod(opts)
         }
     } 
 
@@ -49,6 +54,16 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
     }). catch(e => console.error('ERROR EN RESTPRODUCT FORM ADD SALES: '+e))
     }
 
+    const handleCheckbox = ()=>{
+        if(discount == false){
+            setDiscount(true);
+            console.log(discount)
+        }else{
+            setDiscount(false);
+            console.log(discount)
+        }
+    }
+
     const handleForm = (e)=>{
         e.preventDefault()
         const formData = new FormData(e.target)
@@ -59,9 +74,11 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
         cantidad: parseInt(payload.cantidad) || 0,
         precio:parseFloat(codPro.price) || edit.precio|| 0, //parseFloat(payload.precio) || 0,
         plataforma: payload.plataforma || "",
-        total: codPro.price * cantidad|| edit.precio * cantidad || edit.total,//precio * cantidad,
+        total: payload.total || codPro.price * cantidad|| edit.precio * cantidad || edit.total,//precio * cantidad,
         cod_product: payload.cod_product || '',
         customer: payload.customer || '',
+        notas: payload.notes ||'',
+        metodo: payload.paymentMethod ||'',
         delete: 0,
        
       };
@@ -70,7 +87,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
         document.getElementById('addSales').reset();
         setCantidad(1)
         setPrecio(1)
-        //console.log(newdata)
+        console.log(newdata)
         
         
         if (!edit) {
@@ -97,6 +114,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
     useEffect(()=>{
        // getType(0)
         getType(1)
+        getType(3)
     },[])
     console.log(`I'm on Form ADD SALES > ${JSON.stringify(edit)}`)
   
@@ -113,7 +131,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
                 <div className="mb-3 col-6" >
                     <label htmlFor="customer" className="form-label">Nombre</label>
                     <input  type="text" className="form-control" id="customer" name='customer' aria-describedby="emailHelp"
-                        defaultValue={(edit ? edit.fecha : '' )}
+                        defaultValue={(edit ? edit.customer : '' )}
                     />
                 </div>
             </div>
@@ -171,14 +189,36 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
                 </div>
                 <div className="mb-3 col-4">
                     <label htmlFor="total" className="form-label">Total</label>
-                    <input  type="number" className="form-control" id="total" disabled value={
+                    { discount == false?
+                    <input  type="number" className="form-control" id="total" disabled defaultValue={0} value={
                         edit? edit.total : codPro ? codPro.price * cantidad :0} name="total"
 
                     />
+                    :
+                    <input  type="number" className="form-control" id="total"  defaultvalue={
+                        edit? edit.total : 0} name="total"
+
+                    />
+                }
                 </div>
+                
             </div>
+            <div className="row mb-3 ">
+                <div className="col-8">
+                    <label htmlFor="notes" className="form-label">Notas</label>
+                        <input  type="text" className="form-control" id="notes" name="notes" 
+                            defaultValue={(edit ? edit.notes : '' )}
+                        />
+                    </div>
+                <div className="mb-3 col-4 mt-4 align-self-end "  role="group" aria-label="Basic checkbox toggle button group">
+                    <input className="form-check-input " type="checkbox" value="" id="discount" onChange={handleCheckbox}/>
+                    <label className="form-check-label ms-2 align-self-center" for="discount">Discount</label>
+                </div>
+                
+            </div>
+
             <div className="row mb-3">
-                <div className="col-12">
+                <div className="col-6">
                         <select className="form-select " aria-label="Default select example" name="plataforma"  >
                             <option  >select a platform</option>
                             {
@@ -192,9 +232,24 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
                             }
                         </select>
                     </div>
+                    <div className="col-6">
+                        <select className="form-select " aria-label="Default select example" name="paymentMethod"  >
+                            <option  >select a Payment Method</option>
+                            {
+                                paymentMethod?
+                            paymentMethod.map((method,i) =>{
+                                    if(edit && edit.metodo == method.descripcion)  return <option value={method.descripcion} key={i} selected>{method.descripcion} </option>
+                                    return <option value={method.descripcion} key={i}>{method.descripcion} </option>
+                            })
+                            :
+                            <option>otro</option>
+                            }
+                        </select>
+                    </div>
               
                 
             </div>
+            
             <div className="row justify-content-center mt-2">
                 <button className="buttonGreen px-2 col-2" data-bs-dismiss="modal" aria-label="Close">Submit</button>
             </div>
