@@ -9,7 +9,7 @@ export default function SearchBar({onSearch= f=>f, tableURL,helper}){
         if(payload.name != ''){
             console.log(tableURL)
             //http://localhost:8000/api/v1/${tableURL}/${payload.name}/
-            axios.get(`http://localhost:8000/api/v1/${tableURL}/${payload.name}`)
+            axios.get(`https://backendsalessys.onrender.com/api/v1/${tableURL}/${payload.name}`)
             .then((res)=>{
                 console.log(res.data)
                 onSearch(res.data)
