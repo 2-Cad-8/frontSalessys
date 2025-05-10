@@ -8,7 +8,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
     const [platforms, setPlatforms]=useState()
 
     const getType = async (type)=>{
-        const data = await axios.get('http://127.0.0.1:8000/api/v1/type')
+        const data = await axios.get('https://backendsalessys.onrender.com/api/v1/type')
         const pureData = await data.data;
         const opts = await pureData.filter((opt)=> opt.tipo === type)
        
@@ -39,7 +39,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
         setPrecio(1)
         
         if (!edit) {
-            axios.post('http://127.0.0.1:8000/api/v1/inventory/', newdata)
+            axios.post('https://backendsalessys.onrender.com/api/v1/inventory/', newdata)
               .then(() => {
                 console.log('Added');
                 onSend(true);
@@ -47,7 +47,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
               .catch(console.error);
           } else {
             //console.log(newdata)
-            axios.put(`http://127.0.0.1:8000/api/v1/inventory/${edit.id}/`, newdata)
+            axios.put(`https://backendsalessys.onrender.com/api/v1/inventory/${edit.id}/`, newdata)
               .then(() => {
                 console.log('Updated');
                 onSend(true);
