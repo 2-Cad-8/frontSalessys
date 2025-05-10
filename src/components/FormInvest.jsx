@@ -7,7 +7,7 @@ export default function FormInvest ({edit,send = f=>f, onEdit = f =>f}){
     const [investType, setInvestType]=useState()
 
     const getType = async ()=>{
-        const data = await axios.get('http://127.0.0.1:8000/api/v1/budget')
+        const data = await axios.get('https://backendsalessys.onrender.com/api/v1/budget')
         const pureData = await data.data;
         console.log(pureData)
         setInvestType(pureData)
@@ -15,12 +15,12 @@ export default function FormInvest ({edit,send = f=>f, onEdit = f =>f}){
 
     const handleRestFund = (amount,idFund)=>{
         
-        axios.get(`http://localhost:8000/api/v1/budget/${idFund}/`)
+        axios.get(`https://backendsalessys.onrender.com/api/v1/budget/${idFund}/`)
         .then(async res =>{
             console.log(res.data)
             res.data.available =  res.data.available - amount
             console.log(res.data)
-          axios.put(`http://localhost:8000/api/v1/budget/${idFund}/`,res.data)
+          axios.put(`https://backendsalessys.onrender.com/api/v1/budget/${idFund}/`,res.data)
             .then(()=> {
                 console.log('rested from fund')
                 
@@ -55,7 +55,7 @@ export default function FormInvest ({edit,send = f=>f, onEdit = f =>f}){
         
         
         if (!edit) {
-            axios.post('http://127.0.0.1:8000/api/v1/investments/', newdata)
+            axios.post('https://backendsalessys.onrender.com/api/v1/investments/', newdata)
               .then(() => {
                 console.log('Added');
                 send(true);
@@ -63,7 +63,7 @@ export default function FormInvest ({edit,send = f=>f, onEdit = f =>f}){
               })
               .catch(console.error);
           } else {
-            axios.put(`http://127.0.0.1:8000/api/v1/investments/${edit.id}/`, newdata)
+            axios.put(`https://backendsalessys.onrender.com/api/v1/investments/${edit.id}/`, newdata)
               .then(() => {
                 console.log('Updated');
                 send(true);
