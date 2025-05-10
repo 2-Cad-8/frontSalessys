@@ -13,7 +13,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
     const [discount,setDiscount] = useState(false);
 
     const getType = async (type)=>{
-        const data = await axios.get('http://127.0.0.1:8000/api/v1/type')
+        const data = await axios.get('https://backendsalessys.onrender.com/api/v1/type')
         const pureData = await data.data;
         const opts = await pureData.filter((opt)=> opt.tipo === type)
        
@@ -40,12 +40,12 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
     const restProduct = (amount)=>{
        // setCodPro(codPro.units = newdata)
         console.log(codPro)
-        axios.get(`http://localhost:8000/api/v1/inventory/${codPro.id}/`)
+        axios.get(`https://backendsalessys.onrender.com/api/v1/inventory/${codPro.id}/`)
         .then(res =>{
             console.log(res)
             res.data.units = res.data.units - amount
             console.log(res)
-           axios.put(`http://localhost:8000/api/v1/inventory/${codPro.id}/`,res.data)
+           axios.put(`https://backendsalessys.onrender.com/api/v1/inventory/${codPro.id}/`,res.data)
             .then(()=> {
                 console.log('rested')
                 setCodPro([])
@@ -91,7 +91,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
         
         
         if (!edit) {
-            axios.post('http://127.0.0.1:8000/api/v1/sales/', newdata)
+            axios.post('https://backendsalessys.onrender.com/api/v1/sales/', newdata)
               .then(async () => {
                 //console.log('Added');
                 onSend(true);
@@ -100,7 +100,7 @@ export default function FormAddSales ({edit, onSend = f =>f, onEdit=f=>f}){
               .catch(console.error);
           } else {
             console.log(newdata)
-           axios.put(`http://127.0.0.1:8000/api/v1/sales/${edit.id}/`, newdata)
+           axios.put(`https://backendsalessys.onrender.com/api/v1/sales/${edit.id}/`, newdata)
               .then(() => {
                // console.log('Updated');
                 onSend(true);
