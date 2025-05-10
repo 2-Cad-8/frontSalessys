@@ -20,7 +20,7 @@ export default function FormType({edit,onSend=f=>f, onEdit = f =>f }){
         document.getElementById('addType').reset();
         
         if(!edit){
-        axios.post('http://127.0.0.1:8000/api/v1/type/',newdata)
+        axios.post('https://backendsalessys.onrender.com/api/v1/type/',newdata)
         .then(()=>{
             console.log('added') 
             onSend(true)
@@ -28,7 +28,7 @@ export default function FormType({edit,onSend=f=>f, onEdit = f =>f }){
         ).catch(console.error)
         
         }else{
-            axios.put(`http://127.0.0.1:8000/api/v1/type/${edit.id}/`,newdata)
+            axios.put(`https://backendsalessys.onrender.com/api/v1/type/${edit.id}/`,newdata)
             .then(()=>{
                 console.log('updated') 
                 onSend(true)
