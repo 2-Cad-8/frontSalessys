@@ -16,7 +16,7 @@ export default function PageCustomer(){
 
      async function getData(){
         try{
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/customers/')
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/customers/')
         const datos = res.data.filter((item)=>{if (item.delete !=1){
           return item
         }})
