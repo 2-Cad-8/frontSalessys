@@ -26,7 +26,7 @@ export default function SearchResultTable({
     const dataEdit = async (e) =>{
       
         try{
-        let data = await axios.get(`http://127.0.0.1:8000/api/v1/${from}/${e}`)
+        let data = await axios.get(`https://backendsalessys.onrender.com/api/v1/${from}/${e}`)
         console.log(`i am the search of edit item returned: ${data}`)
         onEdit(data.data)
       
@@ -39,9 +39,9 @@ export default function SearchResultTable({
         console.log('delete function '+ id)
        if(id !== null) {
        try{
-        const res = await axios.get(`http://127.0.0.1:8000/api/v1/${from}/${id}/`)
+        const res = await axios.get(`https://backendsalessys.onrender.com/api/v1/${from}/${id}/`)
         const newdata =  { ...res.data, delete: 1 };
-        await axios.put(`http://127.0.0.1:8000/api/v1/${from}/${id}/`,newdata)
+        await axios.put(`https://backendsalessys.onrender.com/api/v1/${from}/${id}/`,newdata)
      
             console.log('deleted')
             onSent(true)
