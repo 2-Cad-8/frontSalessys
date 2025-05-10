@@ -7,7 +7,7 @@ export default function FormAddFund ({edit,onSend = f=>f, onEdit = f =>f}){
     const [investType, setInvestType]=useState()
 
     const getType = async (type)=>{
-        const data = await axios.get('http://127.0.0.1:8000/api/v1/type')
+        const data = await axios.get('https://backendsalessys.onrender.com/api/v1/type')
         const pureData = await data.data;
         const opts = await pureData.filter((opt)=> opt.tipo === type)
         console.log(opts)
@@ -39,14 +39,14 @@ export default function FormAddFund ({edit,onSend = f=>f, onEdit = f =>f}){
         
         
         if (!edit) {
-            axios.post('http://127.0.0.1:8000/api/v1/budget/', newdata)
+            axios.post('https://backendsalessys.onrender.com/api/v1/budget/', newdata)
               .then(() => {
                 console.log('Added');
                 onSend(true);
               })
               .catch(console.error);
           } else {
-            axios.put(`http://127.0.0.1:8000/api/v1/budget/${edit.id}/`, newdata)
+            axios.put(`https://backendsalessys.onrender.com/api/v1/budget/${edit.id}/`, newdata)
               .then(() => {
                 console.log('Updated');
                 onSend(true);
