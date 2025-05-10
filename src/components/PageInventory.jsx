@@ -19,7 +19,7 @@ export default function PageInventory(){
 
      async function getData(){
         try{
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/inventory/')
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/inventory/')
         const datos = res.data.filter((item)=>{if (item.delete !=1){
           return item
         }})
@@ -35,7 +35,7 @@ export default function PageInventory(){
     }
     async function getOptions(){
       try{
-      const res = await axios.get('http://127.0.0.1:8000/api/v1/type/')
+      const res = await axios.get('https://backendsalessys.onrender.com/api/v1/type/')
       const datos = res.data.filter((item)=>{if (item.delete !=1 && item.tipo == 0){
         return item
       }})
@@ -74,7 +74,7 @@ export default function PageInventory(){
                 {opts != null ?
                   <FilterButton
                     options={opts}
-                    url={'http://localhost:8000/api/v1/profilter/?category=value'}
+                    url={'https://backendsalessys.onrender.com/api/v1/profilter/?category=value'}
                     onSearch={(data)=> {
                       setSearch(data)
                       //console.log(data)
