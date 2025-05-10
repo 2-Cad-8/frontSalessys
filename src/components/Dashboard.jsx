@@ -15,14 +15,14 @@ export default function Dashboard(){
 
     //DATA RETRIEVING
     const getSales = async() =>{
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/sales/');
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/sales/');
         const data = await res.data.filter((item)=>{
           if(item.delete !=1) return item
         })
         setSalesData(data) ///ADD HERE TO CLEAN DATA AKA IGNORE DELETED ONES (1)
     }
     const getInvestments = async() =>{
-      const res = await axios.get('http://127.0.0.1:8000/api/v1/investments/');
+      const res = await axios.get('https://backendsalessys.onrender.com/api/v1/investments/');
       const data = await res.data.filter((item)=> item.delete !=1)
 
       setInvestData(data)
