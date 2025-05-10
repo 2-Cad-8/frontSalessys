@@ -13,7 +13,7 @@ export default function InvestmentPage(){
    //************************************************************FUNCTIONS
    async function getData(){
     try{
-    const res = await axios.get('http://127.0.0.1:8000/api/v1/investments/')
+    const res = await axios.get('https://backendsalessys.onrender.com/api/v1/investments/')
     const datos = res.data.filter((item)=> item.delete != 1)
     console.log(datos)
 
