@@ -7,7 +7,7 @@
 
  async function getSales(){
     try{
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/sales/')
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/sales/')
         const datos = res.data.filter((item)=>{if (item.delete !=1){
           return item
         }})
@@ -19,7 +19,7 @@
 
  async function getInvestments(){
     try{
-        const res = await axios.get('http://127.0.0.1:8000/api/v1/investments/')
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/investments/')
         const datos = res.data.filter((item)=>{if (item.delete !=1){
           return item
         }})
@@ -31,7 +31,7 @@
 
  async function getFunds (){
     try{
-        const res = await axios.get('http://localhost:8000/api/v1/budget/')
+        const res = await axios.get('https://backendsalessys.onrender.com/api/v1/budget/')
         const datos = res.data.filter((item)=>{if (item.delete !=1){
           return item
         }})
@@ -73,14 +73,14 @@ export async function divideFund(){
             fund[i].available = liquid * (fund[i].percentage/100)
             let newfund = fund[i]
             console.log(liquid * (fund[i].percentage/100))
-            axios.put(`http://127.0.0.1:8000/api/v1/budget/${fund[i].id}/`,newfund)
+            axios.put(`https://backendsalessys.onrender.com/api/v1/budget/${fund[i].id}/`,newfund)
         }
         return res
 }
 
 export async function searchProduct(cod){
     try{
-    const res = await axios.get(`http://localhost:8000/api/v1/searchpro/${cod}`)
+    const res = await axios.get(`https://backendsalessys.onrender.com/api/v1/searchpro/${cod}`)
     const data = await res.data;
 
     if(data){
