@@ -82,7 +82,7 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f,data
             <div className="row">
                 <div className="mb-3 col-3" >
                     <label htmlFor="fecha" className="form-label">Codigo</label>
-                    <input  type="text" className="form-control" id="cod_product" name='cod_product' aria-describedby="emailHelp"
+                    <input onChange={(e)=>verifyCode(e)}  type="text" className="form-control" id="cod_product" name='cod_product' aria-describedby="emailHelp"
                         defaultValue={(edit ? edit.cod_product : '' )}
                     />
                     {codeExist.state?
