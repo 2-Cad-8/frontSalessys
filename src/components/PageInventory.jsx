@@ -121,7 +121,7 @@ export default function PageInventory(){
                     onEdit={(value)=>{
                       setEdit(value)
                     } }
-                    data ={data}
+                  
                     />}
                     inventory={['units',0]}
                     itemsTable ={10}
@@ -166,6 +166,7 @@ export default function PageInventory(){
                     onEdit={(value)=>{
                       setEdit(value)
                     }}
+                        data ={data}
                   />
                 </div>
               </div>
