@@ -125,11 +125,11 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f,data
                         />
                 </div>
                 <div className="mb-3 col-4">
-                    <label htmlFor="total" className="form-label">Categoria</label>
+                    <label htmlFor="category" className="form-label">Categoria</label>
                     {/*<input  type="text" className="form-control" id="category"  name="category"
                          defaultValue={(edit ? edit.category : '' )}
                     />*/}
-                    <select className="form-select " aria-label="Default select example" name="categoria"  >
+                    <select className="form-select " aria-label="Default select example" name="category"  >
                             <option  >select</option>
                             {
                                 productos?
