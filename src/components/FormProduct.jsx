@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
+export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f,data}){
     const [precio, setPrecio]=useState(edit? edit.precio : 0)
     const [cantidad, setCantidad]=useState( edit? edit.cantidad : 0)
     const [productos, setProductos]=useState()
     const [platforms, setPlatforms]=useState()
+    const [codeExist, setCodeExist]= useState({state:false,msgfalse:"Good",msgtrue:'Exists'})
 
     const getType = async (type)=>{
         const data = await axios.get('https://backendsalessys.onrender.com/api/v1/type')
@@ -57,6 +58,17 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
           }
         
         }
+    
+     const verifyCode = (e)=>{
+        
+        const found = data.find(item => item.cod_product == e.target.value)
+        console.log(found)
+        if(found){
+            setCodeExist({state:true,msgfalse:"Good",msgtrue:'Exists'})
+        }else{
+            setCodeExist({state:false,msgfalse:"Good",msgtrue:'Exists'})
+        }
+    }
 
     useEffect(()=>{
         getType(0)
@@ -73,6 +85,11 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
                     <input  type="text" className="form-control" id="cod_product" name='cod_product' aria-describedby="emailHelp"
                         defaultValue={(edit ? edit.cod_product : '' )}
                     />
+                    {codeExist.state?
+                     <p className="bg-danger-subtle text-danger mt-2 py-1 text-center rounded-4">{codeExist.msgtrue}</p>
+                     : 
+                     <p className="bg-success-subtle text-success mt-2 py-1 text-center rounded-4">{codeExist.msgfalse}</p>
+                     }
                 </div>
                 <div className="mb-3 col-9" >
                     <label htmlFor="customer" className="form-label">Descripcion</label>
@@ -109,9 +126,21 @@ export default function FormAddProducts ({edit, onSend = f =>f, onEdit=f=>f}){
                 </div>
                 <div className="mb-3 col-4">
                     <label htmlFor="total" className="form-label">Categoria</label>
-                    <input  type="text" className="form-control" id="category"  name="category"
+                    {/*<input  type="text" className="form-control" id="category"  name="category"
                          defaultValue={(edit ? edit.category : '' )}
-                    />
+                    />*/}
+                    <select className="form-select " aria-label="Default select example" name="categoria"  >
+                            <option  >select</option>
+                            {
+                                productos?
+                            productos.map((product,i) =>{
+                                    if(edit && edit.category == product.descripcion)  return <option value={product.descripcion} key={i} selected>{product.descripcion} </option>
+                                    return <option value={product.descripcion} key={i}>{product.descripcion} </option>
+                            })
+                            :
+                            <option>otro</option>
+                            }
+                        </select>
                 </div>
             </div>
          
